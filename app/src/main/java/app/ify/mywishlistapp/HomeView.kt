@@ -23,15 +23,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import app.ify.mywishlistapp.data.DummyWish
 import app.ify.mywishlistapp.data.Wish
 
 @Composable
-fun HomeView() {
+fun HomeView(
+    navController: NavController,
+    viewModel: WishViewModel
+) {
     val context = LocalContext.current
   Scaffold (
     topBar = { AppBarView(title = "WishList", {
-        Toast.makeText(context, "Button Clicked", Toast.LENGTH_LONG).show()
+        Toast.makeText(context,
+            "Button Clicked", Toast.LENGTH_LONG).show()
     })},
       floatingActionButton = {
           FloatingActionButton(
@@ -40,6 +45,8 @@ fun HomeView() {
               containerColor = Color.Black,
               onClick = {
                   Toast.makeText(context, "FAButton Clicked", Toast.LENGTH_LONG).show()
+                  navController.navigate(Screen.AddScreen.route)
+                  //TODO Add Navigation to add screen
               }) {
               Icon(imageVector = Icons.Default.Add, contentDescription = null)
               
